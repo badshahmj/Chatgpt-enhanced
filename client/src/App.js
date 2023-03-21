@@ -56,7 +56,6 @@ function App() {
       var myDiv = document.getElementById('myDiv');
       myDiv.scrollTop = myDiv.scrollHeight;
     }, [1000]);
-    console.log('Inise handle submit  ', messages);
     const response = await fetch('https://chatgpt-olgh.onrender.com/', {
       method: 'POST',
       headers: {
@@ -80,8 +79,7 @@ function App() {
     <div className="App">
       <aside className="sidemenu">
         <div className="side-menu-button" onClick={clearChat}>
-          <span>+</span>
-          New Chat
+          +<span>New Chat</span>
         </div>
       </aside>
       <section className="chatbox">
@@ -110,13 +108,9 @@ const ChatMessage = ({ message }) => {
       style={{ width: '90%' }}
     >
       <div className="chat-message-center">
-        <div className={`avatar ${message.user === 'gpt' && 'chatgpt'}`}>
+        <div className={`avatar ${message.user === 'gpt' ? '' : 'chatgpt'}`}>
           {message.user === 'gpt' ? (
-            <img
-              style={{ height: '100%', width: '100%' }}
-              src={chatGptLogo}
-              alt="logo"
-            />
+            <img style={{ height: '100%' }} src={chatGptLogo} alt="logo" />
           ) : (
             <img
               style={{ height: '100%', width: '100%' }}

@@ -69,5 +69,5 @@ app.get('/models', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`app listening at ${port} ${process.env.API_KEY}`);
+  console.log(`app listening at ${port}`);
 });

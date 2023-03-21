@@ -1,16 +1,16 @@
-import { useState } from "react";
-import user from "./assets/user4.png";
-import "./App.css";
-import "./normal.css";
-import chatGptLogo from "./assets/chatGpt.png";
+import { useState } from 'react';
+import user from './assets/user4.png';
+import './App.css';
+import './normal.css';
+import chatGptLogo from './assets/chatGpt.png';
 function App() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   // const [models, setModels] = useState([]);
   // const [currentModel, setCurrentModel] = useState("text-davinci-003");
   const [chatLog, setChatLog] = useState([
     {
-      user: "gpt",
-      message: "How can i help you today?",
+      user: 'gpt',
+      message: 'How can i help you today?',
     },
   ]);
 
@@ -22,8 +22,8 @@ function App() {
   function clearChat() {
     setChatLog([
       {
-        user: "gpt",
-        message: "How can i help you today?",
+        user: 'gpt',
+        message: 'How can i help you today?',
       },
     ]);
   }
@@ -43,24 +43,24 @@ function App() {
     let chatLogTemp = [
       ...chatLog,
       {
-        user: "me",
+        user: 'me',
         message: `${input}`,
       },
     ];
     setChatLog(chatLogTemp);
-    setInput("");
+    setInput('');
 
     //fetch request to the api combining the chatlog array of message and sending it a message to localhost:3000 as a post
-    const messages = chatLogTemp.map((message) => message.message).join("\n");
+    const messages = chatLogTemp.map((message) => message.message).join('\n');
     setTimeout(() => {
-      var myDiv = document.getElementById("myDiv");
+      var myDiv = document.getElementById('myDiv');
       myDiv.scrollTop = myDiv.scrollHeight;
     }, [1000]);
-    console.log("Inise handle submit  ", messages);
-    const response = await fetch("http://localhost:3080/", {
-      method: "POST",
+    console.log('Inise handle submit  ', messages);
+    const response = await fetch('https://chatgpt-olgh.onrender.com/', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         message: messages,
@@ -71,9 +71,9 @@ function App() {
     const data = await response.json();
 
     console.log(data.message);
-    setChatLog([...chatLogTemp, { user: "gpt", message: `${data.message}` }]);
+    setChatLog([...chatLogTemp, { user: 'gpt', message: `${data.message}` }]);
     setTimeout(() => {
-      var myDiv = document.getElementById("myDiv");
+      var myDiv = document.getElementById('myDiv');
       myDiv.scrollTop = myDiv.scrollHeight;
     }, [1000]);
   }
@@ -103,7 +103,7 @@ function App() {
           })}
         </div>
         <div className="chat-input-holder">
-          <form style={{ width: "100%" }} onSubmit={handleSubmit}>
+          <form style={{ width: '100%' }} onSubmit={handleSubmit}>
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -118,20 +118,20 @@ function App() {
 const ChatMessage = ({ message }) => {
   return (
     <div
-      className={`chat-message ${message.user === "gpt" && "chatgpt"}`}
-      style={{ width: "90%" }}
+      className={`chat-message ${message.user === 'gpt' && 'chatgpt'}`}
+      style={{ width: '90%' }}
     >
       <div className="chat-message-center">
-        <div className={`avatar ${message.user === "gpt" && "chatgpt"}`}>
-          {message.user === "gpt" ? (
+        <div className={`avatar ${message.user === 'gpt' && 'chatgpt'}`}>
+          {message.user === 'gpt' ? (
             <img
-              style={{ height: "100%", width: "100%" }}
+              style={{ height: '100%', width: '100%' }}
               src={chatGptLogo}
               alt="logo"
             />
           ) : (
             <img
-              style={{ height: "100%", width: "100%" }}
+              style={{ height: '100%', width: '100%' }}
               src={user}
               alt="logo"
             />

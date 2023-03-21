@@ -5,6 +5,7 @@ import './normal.css';
 import chatGptLogo from './assets/chatGpt.png';
 function App() {
   const [input, setInput] = useState('');
+  const [disableInput, setDisableInput] = useState(false);
   // const [models, setModels] = useState([]);
   // const [currentModel, setCurrentModel] = useState("text-davinci-003");
   const [chatLog, setChatLog] = useState([
@@ -38,6 +39,7 @@ function App() {
   // }
 
   async function handleSubmit(e) {
+    setDisableInput(true);
     e.preventDefault();
 
     let chatLogTemp = [
@@ -69,6 +71,7 @@ function App() {
 
     const data = await response.json();
     setChatLog([...chatLogTemp, { user: 'gpt', message: `${data.message}` }]);
+    setDisableInput(false);
     setTimeout(() => {
       var myDiv = document.getElementById('myDiv');
       myDiv.scrollTop = myDiv.scrollHeight;
@@ -91,9 +94,11 @@ function App() {
         <div className="chat-input-holder">
           <form style={{ width: '100%' }} onSubmit={handleSubmit}>
             <input
+              disabled={disableInput}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className="chat-input-textarea"
+              style={disableInput ? { backgroundColor: '#343541' } : null}
             ></input>
           </form>
         </div>

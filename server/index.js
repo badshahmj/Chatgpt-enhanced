@@ -1,6 +1,3 @@
-//npm install express cors body-parser morgan openai --save
-//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
-
 const { Configuration, OpenAIApi } = require('openai');
 const express = require('express');
 const dotenv = require('dotenv');
@@ -36,7 +33,6 @@ app.post('/', async (req, res) => {
   res.json({
     message: response.data.choices[0].text,
   });
-  //res.send("Hello world");
 });
 
 app.post('/', async (req, res) => {
@@ -51,16 +47,9 @@ app.post('/', async (req, res) => {
   res.json({
     message: response.data.choices[0].text,
   });
-  //res.send("Hello world");
 });
 
 app.get('/models', async (req, res) => {
-  // import { Configuration, OpenAIApi } from "openai";
-  // const configuration = new Configuration({
-  //     organization: "org-omZyggEOnTd73kVSDeZpPeTb",
-  //     apiKey: process.env.OPENAI_API_KEY,
-  // });
-  // const openai = new OpenAIApi(configuration);
   const response = await openai.listEngines();
   console.log(response.data.data);
   res.json({

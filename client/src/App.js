@@ -69,8 +69,6 @@ function App() {
     });
 
     const data = await response.json();
-
-    console.log(data.message);
     setChatLog([...chatLogTemp, { user: 'gpt', message: `${data.message}` }]);
     setTimeout(() => {
       var myDiv = document.getElementById('myDiv');
@@ -85,16 +83,6 @@ function App() {
           <span>+</span>
           New Chat
         </div>
-        {/* <div className="models">
-          <select onChange={(e) => setCurrentModel(e.target.value)}>
-            {models &&
-              models?.map((model, index) => (
-                <option key={index} value={model.id}>
-                  {model.id}
-                </option>
-              ))}
-          </select>
-        </div> */}
       </aside>
       <section className="chatbox">
         <div className="chat-log" id="myDiv">
